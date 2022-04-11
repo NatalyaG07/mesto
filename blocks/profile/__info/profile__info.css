@@ -1,0 +1,14 @@
+.profile__info {
+  max-width: 366px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+@media (min-width: 320px) and (max-width: 622px) {
+  .profile__info {
+    max-width: 282px;
+    margin-top: 25px;
+    justify-content: center;
+  }
+}
