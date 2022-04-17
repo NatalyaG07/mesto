@@ -8,23 +8,24 @@ const profileInformation = document.querySelector('.profile__information');
 
 function toggleModalWindow() {
   modalWindow.classList.toggle('popup_active');
-  formName.value = profileName.textContent;
-  formInformation.value = profileInformation.textContent;
+  if (modalWindow.classList.contains('popup_active')) {
+    formName.value = profileName.textContent;
+    formInformation.value = profileInformation.textContent; 
+  }
 }
 
 editProfile.addEventListener('click', toggleModalWindow);
 modalCloseBtn.addEventListener('click', toggleModalWindow); 
 
-function onOverlayclick(event) {
-  if (event.target === event.currentTarget) {
-    toggleModalWindow(); 
-  }
-}
+//function onOverlayclick(event) {
+//  if (event.target === event.currentTarget) {
+//    toggleModalWindow(); 
+//  }
+//}
 
-modalWindow.addEventListener('click', onOverlayclick);
+//modalWindow.addEventListener('click', onOverlayclick);
 
 const myForm = document.querySelector('.popup__form');
-const saveForm = document.querySelector('.popup__save');
 
 function onSubmit(e) {
   e.preventDefault();
@@ -34,4 +35,3 @@ function onSubmit(e) {
 }
 
 myForm.addEventListener('submit', onSubmit);
-saveForm.addEventListener('submit', onSubmit);

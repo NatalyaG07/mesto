@@ -1,9 +1,7 @@
 .popup__content {
   width: 100%;
-  margin: 195px auto;
   max-width: 430px;
   padding: 34px 36px 37px;
-  max-height: 330px;
   background-color: #FFFFFF;
   position: relative;
   box-sizing: border-box;
@@ -16,6 +14,5 @@
     margin: 123px auto;
     max-width: 282px;
     padding: 25px 22px;
-    max-height: 322px;
   }
 }

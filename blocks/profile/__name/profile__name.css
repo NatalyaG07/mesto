@@ -9,6 +9,9 @@
   line-height: 1.14;
   word-wrap: break-word;
   color: #FFFFFF;
+  text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
 }
 
 @media (min-width: 320px) and (max-width: 622px) {

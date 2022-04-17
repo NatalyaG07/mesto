@@ -10,6 +10,7 @@
   text-align: center;
   color: #FFFFFF;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 @media (min-width: 320px) and (max-width: 622px) {

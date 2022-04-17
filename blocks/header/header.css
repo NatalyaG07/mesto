@@ -1,8 +1,8 @@
 .header {
   max-width: 880px;
-  height: 74px;
   margin: 45px auto 40px;
-  border-bottom: 1px solid rgba(54, 54, 54, 0.7);
+  border-bottom: 1px solid #545454;
+  opacity: 0.7;
 }
 
 @media (min-width: 623px) and (max-width: 914px) {
@@ -13,7 +13,6 @@
 
 @media (min-width: 320px) and (max-width: 622px) {
   .header {
-    height: 56px;
     margin: 28px auto 42px;
   }
 }
