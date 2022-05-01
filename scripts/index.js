@@ -85,6 +85,25 @@ function getElement(item) {
   const likeBtn = getElementTemplate.querySelector('.elements__like');
   likeBtn.addEventListener('click', toggleLike);
 
+  const imgCardlWindow = document.querySelector('.popup_img-card');
+  const imgCardCloseBtn = imgCardlWindow.querySelector('.popup__close_img-card');
+  
+  function closeImage() {
+    imgCardlWindow.classList.remove('popup_active');
+  }
+
+  function openImage() {
+    imgCardlWindow.classList.add('popup_active');
+      const popupImg = imgCardlWindow.querySelector('.popup__img');
+      const popupName = imgCardlWindow.querySelector('.popup__img-name');
+      popupImg.src = item.link;
+      popupImg.alt = item.name;
+      popupName.textContent = item.name;
+  }
+
+  img.addEventListener('click', openImage);
+  imgCardCloseBtn.addEventListener('click', closeImage);
+
   return getElementTemplate;
 }
 
@@ -97,6 +116,8 @@ function toggleLike(event) {
   const likeActive = event.target.closest('.elements__like');
   likeActive.classList.toggle('elements__like_active');
 }
+
+
 
 render();
 
