@@ -25,7 +25,7 @@
 
       <section class="elements">
         <ul class="elements__team">
-          <li class="elements__iteam">
+          <!--<li class="elements__iteam">
             <img class="elements__img" src="./images/Elemeyns-karachayevsk.jpg" alt="Карачаевск">
             <div class="elements__info">
               <h2 class="elements__title">Карачаевск</h2>
@@ -66,7 +66,7 @@
               <h2 class="elements__title">Карачаево-Черкессия</h2>
               <button class="elements__like" type="button" aria-label="Лайк"></button>
             </div>
-          </li>
+          </li> -->
         </ul>
       </section>
     </main>
@@ -74,6 +74,17 @@
     <footer class="footer">
       <p class="footer__info">&copy; 2020 Mesto Russia</p>
     </footer>
+
+    <template class="template">
+      <li class="elements__iteam">
+        <img class="elements__img" src="" alt="">
+        <button class="elements__remove" type="button" aria-label="Удалить"></button>
+        <div class="elements__info">
+          <h2 class="elements__title"></h2>
+          <button class="elements__like" type="button" aria-label="Лайк"></button>
+        </div>
+      </li>
+    </template>
 
     <div class="popup">
       <div class="popup__content">
@@ -83,6 +94,18 @@
           <input class="popup__input popup__input_type_name" type="text" name="name">
           <input class="popup__input popup__input_type_information" type="text" name="information">
           <button class="popup__save" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  
+    <div class="popup popup_add-card">
+      <div class="popup__content">
+        <button class="popup__close popup__close_add-card" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form popup__form_add-card" name="Profile" method="post">
+          <input class="popup__input popup__input_type_title" type="text" name="title" value="Название">
+          <input class="popup__input popup__input_type_link" type="text" name="link" value="Ссылка">
+          <button class="popup__save popup__save_add-card" type="submit">Создать</button>
         </form>
       </div>
     </div>

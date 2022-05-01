@@ -5,8 +5,10 @@
 @import url(../blocks/elements/__info/elements__info.css);
 @import url(../blocks/elements/__iteam/elements__iteam.css);
 @import url(../blocks/elements/__like/elements__like.css);
+@import url(../blocks/elements/__like/_active/elements__like_active.css);
 @import url(../blocks/elements/__team/elements__team.css);
 @import url(../blocks/elements/__title/elements__title.css);
+@import url(../blocks/elements/__remove/elements__remove.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__info/footer__info.css);
 @import url(../blocks/header/header.css);
