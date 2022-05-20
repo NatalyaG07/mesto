@@ -31,24 +31,60 @@ function openProfilePopup() {
   openPopup(popupEditModalWindow);
 }
 
-//function onOverlayclick(event) {
-//  if (event.target === event.currentTarget) {
-//    toggleModalWindow(); 
-//  }
-//}
-
-//modalWindow.addEventListener('click', onOverlayclick);
-
-const popupFormEditProfile = document.querySelector('.popup__form');
-
-function editProfile(event) {
-  event.preventDefault();
-  profileName.textContent = inputTypeName.value;
-  profileInformation.textContent = inputTypeInformation.value;
-  closePopup(popupEditModalWindow);
+function onOverlayclick(event, popup) {
+ if(event.target === event.currentTarget) {
+  closePopup(popup);
+ }
 }
 
-popupFormEditProfile.addEventListener('submit', editProfile);
+popupEditModalWindow.addEventListener('click', (event) => onOverlayclick(event, popupEditModalWindow));
+inputTypeName.addEventListener('keydown', (event) => closePopupEsc(event, popupEditModalWindow));
+inputTypeInformation.addEventListener('keydown', (event) => closePopupEsc(event, popupEditModalWindow));
+
+const popupFormEditProfile = document.querySelector('.popup__form');
+const btnSaveEditProfile = document.querySelector('.popup__save_edit-profile');
+
+function enableValidation(formSelector, buttonSelector, functionSelector) {
+
+  formSelector.addEventListener('submit', (event) => handleFofmSubmit(event, formSelector, functionSelector));
+  formSelector.addEventListener('input', (event) => handleFofmInput(event, formSelector, buttonSelector));
+
+  toggleButton(formSelector, buttonSelector); 
+}
+
+function toggleButton(formSelector, buttonSelector) {
+  buttonSelector.classList.toggle('popup__save_disabled', !formSelector.checkValidity());
+}
+
+function handleFofmSubmit(event, form, functionSelector) {
+  event.preventDefault();
+  
+  if(form.checkValidity()) {
+    functionSelector();
+  } 
+}
+
+function handleFofmInput(event, formSelector, buttonSelector) {
+  const input = event.target;
+  const errorNode = document.querySelector(`#${input.id}-error`);
+  
+  if(input.validity.valid) {
+    errorNode.textContent =" ";
+  } else {
+    errorNode.textContent = input.validationMessage;
+  }
+
+  toggleButton(formSelector, buttonSelector);
+}
+
+enableValidation(popupFormEditProfile, btnSaveEditProfile, editProfile);
+
+function editProfile() {
+  profileName.textContent = inputTypeName.value;
+  profileInformation.textContent = inputTypeInformation.value;
+
+  closePopup(popupEditModalWindow);
+}
 
 const initialCards = [
   {
@@ -131,6 +167,8 @@ function openImage(item) {
 
 renderCard();
 
+imgCardlWindow.addEventListener('click', (event) => onOverlayclick(event, imgCardlWindow));
+
 const btnAddCard = document.querySelector('.profile__add-button');
 const popupAddCardlWindow = document.querySelector('.popup_add-card');
 const btnCloseAddCard = popupAddCardlWindow.querySelector('.popup__close_add-card');
@@ -139,19 +177,34 @@ btnAddCard.addEventListener('click', purifyAddCard);
 btnCloseAddCard.addEventListener('click', () => closePopup(popupAddCardlWindow));
 
 const popupFormAddCard = document.querySelector('.popup__form_add-card');
+const btnSaveAddCard = document.querySelector('.popup__save_add-card');
 
 function purifyAddCard() {
   popupFormAddCard.reset();
   openPopup(popupAddCardlWindow); 
 }
 
+const inputTypeTitle = popupAddCardlWindow.querySelector('.popup__input_type_title');
+const inputTypeLink = popupAddCardlWindow.querySelector('.popup__input_type_link');
+
 function handleAddCard(event) {
-  event.preventDefault();
-  const inputTypeTitle = popupAddCardlWindow.querySelector('.popup__input_type_title').value;
-  const inputTypeLink = popupAddCardlWindow.querySelector('.popup__input_type_link').value;
-  const element = createElement({ name: inputTypeTitle, link: inputTypeLink });
+  const inputTitleValue = inputTypeTitle.value;
+  const inputLinkValue = inputTypeLink.value;
+  const element = createElement({ name: inputTitleValue, link: inputLinkValue});
   listContainer.prepend(element);
   closePopup(popupAddCardlWindow);
 }
 
-popupFormAddCard.addEventListener('submit', handleAddCard);
+enableValidation(popupFormAddCard, btnSaveAddCard, handleAddCard);
+
+popupAddCardlWindow.addEventListener('click', (event) => onOverlayclick(event, popupAddCardlWindow));
+inputTypeTitle.addEventListener('keydown', (event) => closePopupEsc(event, popupAddCardlWindow));
+inputTypeLink.addEventListener('keydown', (event) => closePopupEsc(event, popupAddCardlWindow));
+
+
+function closePopupEsc(event, popup) {
+  if(event.key === "Escape") {
+    closePopup (popup);
+  }
+}
+
