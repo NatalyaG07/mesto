@@ -1,5 +1,6 @@
 .profile__name {
-  max-width: 294px;
+  max-width: 300px;
+  min-width: 300px;
   margin: 0;
   padding: 0;
   padding-top: 22px;
@@ -10,16 +11,18 @@
   word-wrap: break-word;
   color: #FFFFFF;
   text-overflow: ellipsis;
-   white-space: nowrap;
-   overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (min-width: 320px) and (max-width: 622px) {
   .profile__name {
     max-width: 189px;
+    min-width: 189px;
     font-size: 27px;
     line-height: 33px;
     padding: 0;
     margin-bottom: 5px;
+    text-align: center;
   }
 }

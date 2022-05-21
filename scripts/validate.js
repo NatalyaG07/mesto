@@ -3,20 +3,22 @@ function enableValidation(settings) {
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
-      handleFofmSubmit(formElement);
+      const buttonElement = formElement.querySelector(settings.submitButtonSelector);
+      DisebleButton(settings, buttonElement);
+      handleFormSubmit(formElement);
     });
   setEventListeners(formElement, settings);
 
 });
   }
-  
+
   function setEventListeners(formElement, settings) {                                    //создаём переменную, в которую кладём функцию создания слушателей для всех полей формы (передаём форму)
     const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));   //создаём переменную, в которую кладём массив всех инпутов формы  
     const buttonElement = formElement.querySelector(settings.submitButtonSelector);
     toggleButtonState(settings, inputList, buttonElement);
 
     inputList.forEach((inputElement) => {                                          //обходим массив инпутов (каждый инпут передаём как парамтр)                            
-      inputElement.addEventListener('input', (event) => {                         //на каждый инпут вешаем слушатель события инпут 
+      inputElement.addEventListener('input', function (event) {                         //на каждый инпут вешаем слушатель события инпут 
         checkInputValidity(event, formElement, inputElement);                             //обработчик события инпут проверяет валидность каждого поля (как параметр передаем ему форму и инпут)
         toggleButtonState(settings, inputList, buttonElement);
       });
@@ -24,7 +26,7 @@ function enableValidation(settings) {
   };
 
   const hasInvalidInput = (inputList) => {                                     //функция проверки валидности всех полей формы (принимает на вход массив всех инпутов формы)
-    return inputList.some((inputElement) => {                                  //
+    return inputList.some((inputElement) => {                                 
     return !inputElement.validity.valid;
   });
   }
@@ -37,13 +39,13 @@ function enableValidation(settings) {
     }
   }
   
-  function handleFofmSubmit(formElement) {
+  function handleFormSubmit(formElement) {
     if(formElement.checkValidity()) {
       handleAddCard(formElement);
       editProfile(formElement);
   }}
 
-  function checkInputValidity(event, formSelector, buttonSelector) {
+  function checkInputValidity(event) {
     const input = event.target;
     const errorNode = document.querySelector(`#${input.id}-error`);
     
@@ -52,4 +54,8 @@ function enableValidation(settings) {
     } else {
       errorNode.textContent = input.validationMessage;
     }
+  }
+
+  function DisebleButton(settings, buttonElement){
+    buttonElement.classList.add(settings.inactiveButtonClass);
   }
