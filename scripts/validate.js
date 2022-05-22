@@ -4,8 +4,7 @@ function enableValidation(settings) {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
       const buttonElement = formElement.querySelector(settings.submitButtonSelector);
-      DisebleButton(settings, buttonElement);
-      handleFormSubmit(formElement);
+      disableButton(settings, buttonElement);
     });
   setEventListeners(formElement, settings);
 
@@ -32,18 +31,14 @@ function enableValidation(settings) {
   }
 
   function toggleButtonState(settings, inputList, buttonElement) {
+    
     if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add(settings.inactiveButtonClass);
+      disableButton(settings, buttonElement);
     } else {
       buttonElement.classList.remove(settings.inactiveButtonClass);
+      buttonElement.disabled = false;
     }
   }
-  
-  function handleFormSubmit(formElement) {
-    if(formElement.checkValidity()) {
-      handleAddCard(formElement);
-      editProfile(formElement);
-  }}
 
   function checkInputValidity(event) {
     const input = event.target;
@@ -56,6 +51,7 @@ function enableValidation(settings) {
     }
   }
 
-  function DisebleButton(settings, buttonElement){
+  function disableButton(settings, buttonElement){
     buttonElement.classList.add(settings.inactiveButtonClass);
+    buttonElement.disabled = true;
   }

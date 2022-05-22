@@ -50,19 +50,16 @@ function onOverlayclick(event, popup) {
 popupEditModalWindow.addEventListener('click', (event) => onOverlayclick(event, popupEditModalWindow));
 
 const popupFormEditProfile = document.querySelector('.popup__form');
-// const btnSaveEditProfile = document.querySelector('.popup__save_edit-profile');
+const btnSaveEditProfile = document.querySelector('.popup__save_edit-profile');
 
-
-
-function editProfile(formElement) {
-  if(formElement===popupFormEditProfile){
-    profileName.textContent = inputTypeName.value;
-    profileInformation.textContent = inputTypeInformation.value; 
-  }
-
-
+function editProfile(evt) {
+  //evt.preventDefault();
+  profileName.textContent = inputTypeName.value;
+  profileInformation.textContent = inputTypeInformation.value; 
   closePopup(popupEditModalWindow);
 }
+
+popupFormEditProfile.addEventListener('submit', (event) => editProfile(event));
 
 const initialCards = [
   {
@@ -164,20 +161,16 @@ function purifyAddCard() {
 const inputTypeTitle = popupAddCardlWindow.querySelector('.popup__input_type_title');
 const inputTypeLink = popupAddCardlWindow.querySelector('.popup__input_type_link');
 
-function handleAddCard(formElement) {
-  if(formElement===popupFormAddCard){
-    const inputTitleValue = inputTypeTitle.value;
-    const inputLinkValue = inputTypeLink.value;
-    const element = createElement({ name: inputTitleValue, link: inputLinkValue});
-    listContainer.prepend(element);
-    closePopup(popupAddCardlWindow);
-  }
-
+function handleAddCard(evt) {
+  // evt.preventDefault();
+  const inputTitleValue = inputTypeTitle.value;
+  const inputLinkValue = inputTypeLink.value;
+  const element = createElement({ name: inputTitleValue, link: inputLinkValue});
+  listContainer.prepend(element);
+  closePopup(popupAddCardlWindow);
 }
 
-
-
-
+popupFormAddCard.addEventListener('submit', (event) => handleAddCard(event));
 
 popupAddCardlWindow.addEventListener('click', (event) => onOverlayclick(event, popupAddCardlWindow));
 
