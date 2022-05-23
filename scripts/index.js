@@ -6,7 +6,6 @@ const inputTypeInformation = document.querySelector('.popup__input_type_informat
 const profileName = document.querySelector('.profile__name');
 const profileInformation = document.querySelector('.profile__information');
 
-// import enableValidation from "./scripts/validate.js";
 //function toggleModalWindow() {
 //  popupEditModalWindow.classList.toggle('popup_active');
 //  if (popupEditModalWindow.classList.contains('popup_active')) {
