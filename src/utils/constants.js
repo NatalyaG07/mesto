@@ -31,3 +31,10 @@ export const inputTypeName = document.querySelector('.popup__input_type_name');
 export const inputTypeInformation = document.querySelector('.popup__input_type_information');
 export const buttonAddCard = document.querySelector('.profile__add-button');
 export const popupAddCardlWindow = document.querySelector('.popup_add-card');
+
+export const validationData = {
+  formSelector:'.popup__form',
+  inputSelector:'.popup__input',
+  submitButtonSelector:'.popup__save',
+  inactiveButtonClass: 'popup__save_disabled',
+};

@@ -1,25 +1,19 @@
-import './pages/index.css';
+import './index.css';
 
-import {  FormValidator } from './components/formValidator.js';
+import {  FormValidator } from '../components/formValidator.js';
 import { initialCards,
   buttonEditProfile,
   popupEditModalWindow,
   inputTypeName,
   inputTypeInformation,
   buttonAddCard,
-  popupAddCardlWindow } from './utils/constants.js';
-import { Card } from './components/card.js';
-import { Section } from './components/section.js';
-import { PopupWithImage } from './components/popupWithImage.js';
-import { PopupWithForm } from './components/popupWithForm.js';
-import { UserInfo } from './components/userInfo.js';
-
-const validationData = {
-  formSelector:'.popup__form',
-  inputSelector:'.popup__input',
-  submitButtonSelector:'.popup__save',
-  inactiveButtonClass: 'popup__save_disabled',
-};
+  popupAddCardlWindow,
+  validationData } from '../utils/constants.js';
+import { Card } from '../components/card.js';
+import { Section } from '../components/section.js';
+import { PopupWithImage } from '../components/picturePopup.js';
+import { PopupWithForm } from '../components/popupWithForm.js';
+import { UserInfo } from '../components/userInfo.js';
 
 const validFormProfile = new FormValidator(validationData, popupEditModalWindow);
 const validFormAddCard = new FormValidator(validationData, popupAddCardlWindow);
