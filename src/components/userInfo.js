@@ -15,12 +15,16 @@ export class UserInfo {
     }
 
     setUserInfo(data) {
-        this._userNameSelector.textContent = data.name;
-        this._userDescriptionSelector.textContent = data.information;
+        this.editProfile(data);
         this._userAvatarSelector.src = data.avatar;
     }
 
     editAvatar(data) {
         this._userAvatarSelector.src = data;
+    }
+
+    editProfile(data) {
+        this._userNameSelector.textContent = data.name;
+        this._userDescriptionSelector.textContent = data.information;  
     }
 }

@@ -3,6 +3,7 @@ export class Card {
         this._name = data.name;
         this._link = data.link;
         this._likes = data.likes.length;
+        this._myLike = data.likes;
         this._myId = myId;
         this._userId = data.owner._id;
         this._cardId = data._id;
@@ -39,6 +40,7 @@ export class Card {
 
 
         this._handleRemoveElementActive();
+        this._handleMyLikeDisplay();
         this._setEventListeners();
         
         return this._element;
@@ -82,4 +84,13 @@ export class Card {
     _handleToggleLike() {
         this._like.classList.toggle('elements__like_active');
     }
+
+    _handleMyLikeDisplay() {
+        this._myLike.forEach(like => {
+            if(like._id === this._myId) {
+                this._like.classList.add('elements__like_active');
+            }
+        });
+    }
+
 }

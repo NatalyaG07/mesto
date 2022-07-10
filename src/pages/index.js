@@ -27,20 +27,22 @@ const api = new Api({
   }
 });
 
-// добавление карточек с сервера на страницу
-api.getInitialCards() 
-  .then(items => {
-    const initialCards = items;
-    section.renderItems(initialCards);
-});
-
-// добавление данных профиля с сервера на страницу 
+// добавление данных профиля и карточек с сервера на страницу
 let myId = null;
 
-api.getUserInfo()
-  .then(res => {
-    userInfo.setUserInfo({ name: res.name, information: res.about, avatar: res.avatar });
-    myId = res._id;
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    // тут установка данных пользователя
+    userInfo.setUserInfo({ name: userData.name, information: userData.about, avatar: userData.avatar });
+    myId = userData._id;
+
+    // и тут отрисовка карточек
+    const initialCards = cards;
+    section.renderItems(initialCards);
+  })
+  .catch(err => {
+    // тут ловим ошибку
+    console.log(err);
 });
 
 const validFormProfile = new FormValidator(validationData, popupEditModalWindow);
@@ -72,16 +74,19 @@ function handlePurifyAddCard() {
 }
 
 function handleEditProfile(data) {              
-  userInfo.setUserInfo(data);
 
-  debugger
-
-  // отправка на сервер новых данных профиля
+  // отправка на сервер новых данных профиля и отрисовка их на странице
   userInfoPopup.loading(true);
   api.editProfile(data)
+  .then(() => {
+    userInfo.editProfile(data);
+    userInfoPopup.close();
+  })
+  .catch(err => {
+    console.log(err);
+  })
   .finally(() => {
     userInfoPopup.loading(false);
-    userInfoPopup.close();
   });
 }
 
@@ -116,10 +121,13 @@ function handleAddCard(data) {
   api.addCard(card)
   .then((data) => {
     section.addItem(createCard(data));
+    addCardPopup.close();
+  })
+  .catch(err => {
+    console.log(err);
   })
   .finally(() => {
     updateAvatarPopup.loading(false);
-    addCardPopup.close();
   });
 };
 
@@ -143,7 +151,10 @@ function handleCardDelete(card) {
       card.removeCard(card);
       popupWithConfirmation.close();
     })
-  });
+    .catch(err => {
+      console.log(err);
+    })
+  })
 }
 
 // добавление лайка
@@ -152,6 +163,9 @@ function handleAddLike(card) {
   .then((res) => {
     card.counterLikes(res.likes);
   })
+  .catch(err => {
+    console.log(err);
+  })
 }
 
 // удаление лайка 
@@ -159,6 +173,9 @@ function handleRemoveLike(card) {
   api.removeLike(card._cardId)
   .then((res) => {
     card.counterLikes(res.likes);
+  })
+  .catch(err => {
+    console.log(err);
   })
 }
 
@@ -175,10 +192,13 @@ function handleUpdateAvatar(data) {
   api.editAvatar(data)
   .then((res) => {
     userInfo.editAvatar(res.avatar);
+    updateAvatarPopup.close();
   })
+  .catch(err => {
+    console.log(err);
+})
   .finally(() => {
     updateAvatarPopup.loading(false);
-    updateAvatarPopup.close();
   }); 
 }
 
