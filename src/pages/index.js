@@ -127,7 +127,7 @@ function handleAddCard(data) {
     console.log(err);
   })
   .finally(() => {
-    updateAvatarPopup.loading(false);
+    addCardPopup.loading(false);
   });
 };
 
